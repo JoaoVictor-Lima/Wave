@@ -1,0 +1,15 @@
+# Ignore everything
+/*
+
+# Keep gitignore itself
+!/.gitignore
+
+# Allow Assets/Scripts only
+!/Assets/
+/Assets/*
+!/Assets/Scripts/
+
+# Ignore Unity meta files and non-code files
+*.meta
+*.asset
+*.inputactions

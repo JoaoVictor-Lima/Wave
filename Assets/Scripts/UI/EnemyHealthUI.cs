@@ -1,0 +1,4 @@
+public class EnemyHealthUI : PlayerHealthUI
+{
+
+}
