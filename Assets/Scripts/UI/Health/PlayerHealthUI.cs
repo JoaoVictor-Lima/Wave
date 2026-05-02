@@ -3,28 +3,34 @@ using UnityEngine.UI;
 
 public class PlayerHealthUI : MonoBehaviour
 {
+    // Pode ser setado no Inspector (para inimigos via EnemyHealthUI)
+    // ou via Initialize (para o player local via HUDController)
     [SerializeField] private Health healthComponent;
     [SerializeField] private Slider slider;
 
-    private void Awake()
+    public void Initialize(Health health)
     {
-        if (healthComponent == null)
-            healthComponent = GetComponent<Health>();
+        if (healthComponent != null)
+            healthComponent.OnHealthChanged -= UpdateHealthBar;
+
+        healthComponent = health;
+        healthComponent.OnHealthChanged += UpdateHealthBar;
     }
 
     private void OnEnable()
     {
-        healthComponent.OnHealthChanged += UpdateHealthBar;
+        if (healthComponent != null)
+            healthComponent.OnHealthChanged += UpdateHealthBar;
     }
 
     private void OnDisable()
     {
-        healthComponent.OnHealthChanged -= UpdateHealthBar;
+        if (healthComponent != null)
+            healthComponent.OnHealthChanged -= UpdateHealthBar;
     }
 
     private void UpdateHealthBar(float current, float max)
     {
-        Debug.Log($"Ativado: {current}, {max}");
         slider.maxValue = max;
         slider.value = current;
     }

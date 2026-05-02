@@ -1,4 +1,5 @@
 using Assets.Scripts.Entities.Player;
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -26,6 +27,8 @@ public class PlayerController : MonoBehaviour
 
     private Animator animator;
 
+    public event Action OnReturn;
+
     private float xRotation = 0f;
 
     void Awake()
@@ -48,6 +51,8 @@ public class PlayerController : MonoBehaviour
         Controls.Player.DevPanel.performed += ctx => ToggleDevPanel();
 
         Controls.Player.Interact.performed += ctx => Interaction.TryInteract();
+
+        Controls.Player.Return.performed += ctx => OnReturn?.Invoke();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

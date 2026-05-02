@@ -1,32 +1,28 @@
-﻿using Assets.ScriptableObjects;
+using Assets.ScriptableObjects;
+using Assets.Scripts.Gameplay.Inventory;
+using System;
 using UnityEngine;
 
 namespace Assets.Scripts.Entities.Player
 {
     public class PlayerInventory : MonoBehaviour
     {
-        public Inventory Inventory { get; private set; }
-        [SerializeField] private InventoryUIController InventoryUi;
+        public InventoryBase Inventory { get; private set; }
+
+        public event Action OnOpenRequested;
+        public event Action OnCloseRequested;
 
         private void Awake()
         {
-            Inventory = new Inventory();
-            Inventory.OnInventoryChanged += InventoryUi.RefreshUI;
+            Inventory = new InventoryBase();
+            Inventory.SetSlots(54);
         }
 
-        public void OpenInventory()
-        {
-            InventoryUi.Open(Inventory);
-        }
-
-        public void CloseInventory()
-        {
-            InventoryUi.Close();
-        }
+        public void OpenInventory() => OnOpenRequested?.Invoke();
+        public void CloseInventory() => OnCloseRequested?.Invoke();
 
         public void AddItem(ItemData itemData, int amount)
         {
-            Debug.Log($"Adding {amount} of {itemData.ItemName} to inventory.");
             if (itemData.Stackable)
             {
                 foreach (var item in Inventory.Items)

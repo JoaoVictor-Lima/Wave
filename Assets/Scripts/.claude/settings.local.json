@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir /s /b \"C:\\\\Users\\\\victo\\\\source\\\\Unity\\\\Wave\\\\Assets\\\\Scripts\\\\Inventory.cs\")",
+      "Bash(dir /s /b \"C:\\\\Users\\\\victo\\\\source\\\\Unity\\\\Wave\\\\Assets\\\\Scripts\\\\*Inventory*.cs\")"
+    ]
+  }
+}

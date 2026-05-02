@@ -14,7 +14,10 @@ public class DevPanelUI : MonoBehaviour
 
     private void Awake()
     {
-        gameObject.SetActive(false);
+        if (gameObject.activeSelf)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     public void Open()

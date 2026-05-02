@@ -30,6 +30,8 @@ namespace Assets.ScriptableObjects
         [SubclassSelector]
         public List<InstancedModule> InstancedModules;
 
+        public int? SlotIndex;
+
         public T GetInstanceModule<T>() where T : InstancedModule
         {
             return InstancedModules.Find(m => m is T) as T;
